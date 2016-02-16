@@ -2,16 +2,32 @@
 
 namespace tests\codeception\unit\models;
 
-use yii\codeception\TestCase;
 
-class UserTest extends TestCase
+use Yii;
+use app\models\User;
+use app\models\LoginForm;
+
+
+class IndexFormTest extends \Codeception\TestCase\Test
 {
-    protected function setUp()
-    {
-        parent::setUp();
-        // uncomment the following to load fixtures for user table
-        //$this->loadFixtures(['user']);
-    }
 
-    // TODO add test methods here
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
+    public function testRegUser()
+    {
+        $user = new User();
+
+        $user->email = 'test@test.ru';
+        $user->name = 'test';
+        $user->setPassword('password');
+        $user->generateAuthKey();
+
+        $this->assertTrue($user->validate());
+        $this->assertTrue($user->save());
+
+        $this->tester->seeInDatabase('users', ['email' => 'test@test.ru', 'name' => 'test']);
+    }
 }

@@ -36,7 +36,7 @@ class SiteController extends Controller
                     }
                     if ($model->sendMail($url, $link->email)) {
                         Yii::$app->session->setFlash('warning', 'Check your email');
-                        return $this->redirect(Yii::$app->urlManager->createUrl('site/index'));
+                        return $this->redirect('/site/index');
                     }
                 } else {
                     Yii::$app->session->setFlash('error', 'Error generate link.');
@@ -49,7 +49,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
-        return $this->redirect(Yii::$app->urlManager->createUrl('account/index'));
+        return $this->redirect('/account/index');
     }
 
     public function actionReg($token)
@@ -61,7 +61,7 @@ class SiteController extends Controller
                 if ($user = $model->reg()) {
                     if (Yii::$app->getUser()->login($user)) {
                         Link::deleteLinksByToken($token);
-                        return $this->redirect(Yii::$app->urlManager->createUrl('account/index'));
+                        return $this->redirect('/account/index');
                     }
                 } else {
                     Yii::$app->session->setFlash('error', 'Error sign up.');
@@ -77,7 +77,7 @@ class SiteController extends Controller
                 ]
             );
         }
-        return $this->redirect(Yii::$app->urlManager->createUrl('site/index'));
+        return $this->redirect('/site/index');
     }
 
     public function actionLogin($token)
@@ -87,7 +87,7 @@ class SiteController extends Controller
             $model = new LoginForm();
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
                 Link::deleteLinksByToken($token);
-                return $this->redirect(Yii::$app->urlManager->createUrl('account/index'));
+                return $this->redirect('/account/index');
             }
             return $this->render('login',
                 [
@@ -96,12 +96,12 @@ class SiteController extends Controller
                 ]
             );
         }
-        return $this->redirect(Yii::$app->urlManager->createUrl('site/index'));
+        return $this->redirect('/site/index');
     }
 
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(Yii::$app->urlManager->createUrl('site/index'));
+        return $this->redirect('/site/index');
     }
 }

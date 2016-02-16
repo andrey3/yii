@@ -3,7 +3,7 @@
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
 $params = require(__DIR__ . '/params.php');
-$db = require(__DIR__ . '/db.php');
+//$db = require(__DIR__ . '/db.php');
 
 return [
     'id' => 'basic-console',
@@ -25,7 +25,13 @@ return [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => [
+            'class' => '\yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii2_basic_tests',
+            'username' => 'root',
+            'password' => '1234',
+            'charset' => 'utf8',
+        ],
     ],
     'params' => $params,
 ];

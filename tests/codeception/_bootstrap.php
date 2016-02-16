@@ -7,6 +7,8 @@ defined('YII_TEST_ENTRY_FILE') or define('YII_TEST_ENTRY_FILE', dirname(dirname(
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
 require_once(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
+$config = require(__DIR__ . '/../../config/console.php');
+$application = new yii\console\Application( $config );
 
 $_SERVER['SCRIPT_FILENAME'] = YII_TEST_ENTRY_FILE;
 $_SERVER['SCRIPT_NAME'] = YII_TEST_ENTRY_URL;

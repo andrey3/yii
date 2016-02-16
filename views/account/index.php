@@ -13,7 +13,7 @@ $this->title = 'My Account';
         <h1>Welcome, <?= $user->name ?>!</h1>
         <p><?= $user->email ?></p>
         <?php if($user->image) {?>
-            <p><img src="<?=Url::to('/images/') . $user->image?>" width="230" height="300"></p>
+            <p><img src="<?=Url::to('/images/') . $user->image?>" width="30%" height="30%"></p>
         <?php }?>
 
         <p class="lead">

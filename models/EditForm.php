@@ -44,7 +44,8 @@ class EditForm extends Model
 
             if ($updateImage) {
                 $image = $this->imageFile->baseName . '.' . $this->imageFile->extension;
-                $this->imageFile->saveAs('/home/andrey/web/yii/basic/web/images/' . $image);
+                $path = Yii::getAlias("@app/web/images/$image");
+                $this->imageFile->saveAs($path);
                 $user->image = $image;
             }
 

@@ -35,8 +35,7 @@ class AccountController extends Controller
                 $user = $model->edit($user->id);
             }
             if ($user) {
-                $url = Yii::$app->urlManager->createUrl('account/index');
-                return $this->redirect($url);
+                return $this->redirect('/account/index');
             } else {
                 Yii::$app->session->setFlash('error', 'Error edit name.');
                 Yii::error('Error edit name');
